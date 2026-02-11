@@ -37,3 +37,9 @@ export async function updateCategoryService(
   if (!updated) throw new HttpError(404, "Category not found");
   return toDto(updated);
 }
+
+export async function softDeleteCategoryService(id: string) {
+  const updated = await updateCategory(id, { isActive: false, deletedAt: new Date() } as any);
+  if (!updated) throw new HttpError(404, "Category not found");
+  return toDto(updated);
+}

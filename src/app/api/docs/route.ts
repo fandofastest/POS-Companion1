@@ -382,6 +382,7 @@ const lines = [
   "### GET /api/categories",
   "### POST /api/categories",
   "### PATCH /api/categories/:id",
+  "### DELETE /api/categories/:id",
 ];
 
 export const GET = async () => {

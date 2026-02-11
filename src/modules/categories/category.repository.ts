@@ -24,7 +24,10 @@ export async function findCategoryById(id: string) {
   return (await CategoryModel.findOne({ _id: id, deletedAt: null }).exec()) as CategoryDoc | null;
 }
 
-export async function updateCategory(id: string, patch: Partial<{ name: string; slug: string; isActive: boolean }>) {
+export async function updateCategory(
+  id: string,
+  patch: Partial<{ name: string; slug: string; isActive: boolean; deletedAt: Date | null }>
+) {
   await connectMongo();
   return (await CategoryModel.findOneAndUpdate(
     { _id: id, deletedAt: null },
