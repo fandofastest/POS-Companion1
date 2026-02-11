@@ -10,7 +10,8 @@ export const GET = withApiError(async (req: NextRequest, ctx?: any) => {
   const user = requireAuth(req);
   requireRole(user, ["OWNER", "ADMIN"]);
 
-  const storeId = ctx?.params?.id as string;
+  const params = (await ctx?.params) as { id: string } | undefined;
+  const storeId = params?.id as string;
   requireStoreAccess(user, storeId);
 
   const data = await listCashiersService(storeId);
@@ -21,7 +22,8 @@ export const POST = withApiError(async (req: NextRequest, ctx?: any) => {
   const user = requireAuth(req);
   requireRole(user, ["OWNER", "ADMIN"]);
 
-  const storeId = ctx?.params?.id as string;
+  const params = (await ctx?.params) as { id: string } | undefined;
+  const storeId = params?.id as string;
   requireStoreAccess(user, storeId);
 
   const body = await parseBody(req, createCashierSchema);

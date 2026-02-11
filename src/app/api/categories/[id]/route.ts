@@ -10,7 +10,8 @@ export const PATCH = withApiError(async (req: NextRequest, ctx?: any) => {
   const user = requireAuth(req);
   requireRole(user, ["OWNER", "ADMIN"]);
 
-  const id = ctx?.params?.id as string;
+  const params = (await ctx?.params) as { id: string } | undefined;
+  const id = params?.id as string;
   const body = await parseBody(req, updateCategorySchema);
   const data = await updateCategoryService(id, body);
   return ok(data, "Updated");

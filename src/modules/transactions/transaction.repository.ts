@@ -5,7 +5,14 @@ export async function createTransaction(input: {
   storeId: string;
   invoiceNumber: string;
   items: any[];
+  subtotal: number;
+  discount?: { type: "AMOUNT" | "PERCENT"; amount?: number | null; percent?: number | null } | null;
+  discountAmount: number;
+  tax?: { rate?: number | null; inclusive?: boolean } | null;
+  taxAmount: number;
   totalAmount: number;
+  cashReceived?: number | null;
+  change: number;
   paymentMethod: string;
   cashierId: string;
 }) {
@@ -14,7 +21,14 @@ export async function createTransaction(input: {
     storeId: input.storeId,
     invoiceNumber: input.invoiceNumber,
     items: input.items,
+    subtotal: input.subtotal,
+    discount: input.discount ?? null,
+    discountAmount: input.discountAmount,
+    tax: input.tax ?? null,
+    taxAmount: input.taxAmount,
     totalAmount: input.totalAmount,
+    cashReceived: input.cashReceived ?? null,
+    change: input.change,
     paymentMethod: input.paymentMethod,
     cashierId: input.cashierId,
   });

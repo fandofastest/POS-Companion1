@@ -16,6 +16,9 @@ export const POST = withApiError(async (req: NextRequest) => {
     storeId: body.storeId,
     invoiceNumber: body.invoiceNumber,
     paymentMethod: body.paymentMethod,
+    discount: body.discount,
+    tax: body.tax,
+    cashReceived: body.cashReceived,
     items: body.items,
     cashierId: user.sub,
   });
